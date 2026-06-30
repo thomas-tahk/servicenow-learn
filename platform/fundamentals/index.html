@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiceNow Platform Fundamentals</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  .runs { font-family: var(--font-ui); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: var(--good); display: inline-block; padding: 0.12rem 0.5rem; border-radius: 4px; margin-bottom: 0.3rem; }
+  .runs.client { background: #4a6fa5; }
+  .runs.server { background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap wrap--wide">
+
+  <div class="crumbs">
+    <a href="../../index.html">ServiceNow Learn</a> · Platform · Fundamentals
+  </div>
+  <h1>ServiceNow platform fundamentals</h1>
+  <p class="subtitle">The cross-cutting platform knowledge that every certification builds on — how the docs are organized, where you practice, and the scripting model. Reused by CAD and every cert after it; not exam-specific.</p>
+
+  <div class="win">
+    <strong>Why this is separate from any one cert:</strong> the doc-site map, the lab-vs-PDI distinction,
+    the five mental models, and the client/server scripting model show up in CSA, CAD, and the specialist
+    tracks alike. Learn them once here; each cert folder only adds its own exam blueprint on top.
+  </div>
+
+  <h2>1 — The four sites (don't confuse them)</h2>
+  <p>"ServiceNow docs" is really four properties. Knowing which is which saves hours:</p>
+  <table>
+    <tr><th>Site</th><th>What it is</th><th>When you use it</th></tr>
+    <tr><td><code>servicenow.com/docs</code></td><td><strong>Product documentation</strong> — the authoritative reference, versioned by release (…Xanadu → Yokohama → <strong>Zurich</strong>).</td><td>Look up exactly how a feature behaves. Dry &amp; complete, not a tutorial.</td></tr>
+    <tr><td><code>developer.servicenow.com</code></td><td><strong>Developer Portal</strong> — your free PDI, the <strong>API reference</strong>, build tutorials, the Store.</td><td>Your home as a builder. The API reference here answers most scripting questions.</td></tr>
+    <tr><td><code>learning.servicenow.com</code></td><td><strong>ServiceNow University</strong> — courses, learning paths, exam blueprints, exam registration. (Your bootcamp lives here.)</td><td>Structured study + certification logistics.</td></tr>
+    <tr><td><code>community.servicenow.com</code></td><td>Forums — real-world "how / why" answers.</td><td>When the docs tell you <em>what</em> but not <em>why</em>.</td></tr>
+  </table>
+  <div class="gotcha">
+    <span class="label">Version trap</span>
+    Docs default to the latest release and the main certs are "mainline" (track current). Make sure you're
+    reading <strong>Zurich</strong>, not an old bookmarked page — the release name is in the URL and page header.
+  </div>
+
+  <h2>2 — Where you actually practice</h2>
+  <p>ServiceNow University gives you <strong>lab instances</strong>. They are not the same as a PDI, and the difference matters:</p>
+  <table>
+    <tr><th></th><th>Lab instance</th><th>Simulator</th><th>PDI</th></tr>
+    <tr><td>Where</td><td>University, attached to a course</td><td>University</td><td>developer.servicenow.com</td></tr>
+    <tr><td>What</td><td>Real instance, <strong>pre-loaded</strong> with the course's plugins + data</td><td>Guided click-through that <strong>checks your steps</strong></td><td>A full-admin instance that is <strong>yours</strong></td></tr>
+    <tr><td>Lifespan</td><td><strong>Temporary</strong> — time-boxed to the course, then gone</td><td>In-browser</td><td><strong>Persistent</strong> (~10-day idle reset)</td></tr>
+    <tr><td>Best for</td><td>Doing the graded course labs as written</td><td>Procedure muscle-memory</td><td><strong>Free-form building &amp; breaking things</strong></td></tr>
+  </table>
+  <div class="why">
+    <span class="label">Why get a PDI anyway</span>
+    Lab instances reset and run on rails, so you rarely hit the messy "why won't my Business Rule fire / why is
+    this ACL blocking me" moments — and those moments are where the harder domains are actually learned. A PDI
+    lets you build one small scoped app and grow it across a whole course. It's free: developer.servicenow.com →
+    sign in → request instance.
+  </div>
+
+  <h2>3 — The five mental models</h2>
+  <p>Internalize these and the rest is detail. This is the gap between a daily user and a developer:</p>
+  <ol class="steps">
+    <li><strong>Everything is a table.</strong> Incidents, your app, and even <em>configuration itself</em> (business rules, UI policies, ACLs) are all just records in tables. "Configuring ServiceNow" = inserting/updating records. Biggest single unlock.</li>
+    <li><strong>Client vs. server is the master split.</strong> Some code runs in the browser (<code>g_form</code>, <code>g_user</code>), some on the server (<code>GlideRecord</code>, <code>gs</code>). Knowing <em>where</em> a script runs answers half the scripting questions on any exam.</li>
+    <li><strong><code>GlideRecord</code> is the ORM.</strong> It's how server-side JavaScript queries/creates/updates/deletes records. You'll write it constantly.</li>
+    <li><strong>ACLs are evaluated, not assumed.</strong> Access = role + condition + script, evaluated most-specific-first.</li>
+    <li><strong>A scoped application</strong> is your code in its own namespace (<code>x_yourapp_…</code>), sandboxed from the global platform.</li>
+  </ol>
+
+  <h2>4 — The scripting model (client vs. server)</h2>
+  <p>Every script type below answers one question: <strong>where does this code run, and when?</strong> Keep this table open as you read the examples. Downloadable copies of each example live in <a href="../snippets/">../snippets/</a>.</p>
+  <table>
+    <tr><th>Script type</th><th>Runs</th><th>Fires when</th><th>Reach for it to…</th></tr>
+    <tr><td>Client Script</td><td><strong>Browser</strong></td><td>Form load / field change / submit</td><td>React to the user as they type (validate, warn, set fields)</td></tr>
+    <tr><td>UI Policy</td><td><strong>Browser</strong> (no code)</td><td>Field change</td><td>Show/hide/require fields — <em>prefer this over a Client Script</em></td></tr>
+    <tr><td>Business Rule</td><td><strong>Server</strong></td><td>Before/after a DB insert/update/delete (or async/display)</td><td>Enforce data rules that must always hold, no matter the channel</td></tr>
+    <tr><td>Script Include</td><td><strong>Server</strong></td><td>Only when called</td><td>Reusable server logic; the callable backend for GlideAjax</td></tr>
+    <tr><td>Flow Designer</td><td><strong>Server</strong> (low-code)</td><td>Trigger (record/schedule/etc.)</td><td>Multi-step process automation — <em>prefer over a script when you can</em></td></tr>
+  </table>
+
+  <h3>4.1 GlideRecord — querying on the server</h3>
+  <p>The workhorse. Run these in your PDI under <strong>All → Scripts - Background</strong>. <code>gs.info()</code> writes to the script output / system log.</p>
+  <span class="filename">Scripts - Background (server)</span>
+<pre><code>// Find every open P1 incident and log it.
+var gr = new GlideRecord('incident');
+gr.addQuery('priority', 1);          // priority = 1 (Critical)
+gr.addQuery('active', true);         // still open
+gr.query();                          // run it against the database
+while (gr.next()) {                  // step through each matching row
+  gs.info('Open P1: ' + gr.getValue('number') + ' — ' + gr.getValue('short_description'));
+}</code></pre>
+  <p>To grab <em>one</em> record by a unique value, use <code>get()</code> — it returns a boolean and positions you on the row:</p>
+<pre><code>var gr = new GlideRecord('incident');
+if (gr.get('number', 'INC0010001')) {   // true if found
+  gr.setValue('priority', 1);
+  gr.update();                          // persist the change
+}</code></pre>
+  <div class="gotcha">
+    <span class="label">Three traps the exams love</span>
+    <strong>(1)</strong> <code>query()</code> returns <em>many</em> rows (loop with <code>next()</code>); <code>get()</code> returns <em>one</em> (a boolean).
+    <strong>(2)</strong> Use <code>getValue('field')</code> to read the raw stored value — reading <code>gr.field</code> directly returns an object that can bite you in comparisons.
+    <strong>(3)</strong> <code>gr.setWorkflow(false)</code> before an update suppresses business rules for that operation.
+  </div>
+
+  <h3>4.2 Business Rule — server logic on a database event</h3>
+  <table>
+    <tr><th>When</th><th>Runs</th><th>Typical use</th></tr>
+    <tr><td><strong>before</strong></td><td>Before the record is written</td><td>Set/validate field values on the same record (no <code>update()</code> needed)</td></tr>
+    <tr><td><strong>after</strong></td><td>After the record is written</td><td>Touch <em>other</em> records / send notifications</td></tr>
+    <tr><td><strong>async</strong></td><td>After commit, in the background</td><td>Heavy work that shouldn't slow the user's save</td></tr>
+    <tr><td><strong>display</strong></td><td>When the form loads</td><td>Pass server data to client scripts via the <code>g_scratchpad</code></td></tr>
+  </table>
+  <span class="filename">Business Rule · before · table: incident (server)</span>
+<pre><code>(function executeRule(current, previous /*, gs */) {
+  // 'current' is the record being saved; 'previous' is its prior state.
+  if (current.priority == 1) {
+    current.work_notes = 'Auto-flagged as P1 by a business rule.';
+  }
+  // No current.update() here — a 'before' rule saves automatically.
+})(current, previous);</code></pre>
+  <div class="gotcha">
+    <span class="label">The recursion trap</span>
+    Calling <code>current.update()</code> inside an <strong>after</strong> rule on the <em>same</em> record re-triggers
+    the rules → infinite loop. In a <strong>before</strong> rule you never need it.
+  </div>
+
+  <h3>4.3 Client Script — reacting in the browser</h3>
+  <span class="filename">Client Script · onChange · field: priority (browser)</span>
+<pre><code>function onChange(control, oldValue, newValue, isLoading) {
+  if (isLoading || newValue === '') return;   // skip the initial form load
+  if (newValue == '1') {                       // Priority set to Critical
+    g_form.setMandatory('work_notes', true);
+    g_form.addInfoMessage('P1 selected — work notes are now required.');
+  }
+}</code></pre>
+  <div class="note">
+    <span class="label">Client Script vs. UI Policy</span>
+    If all you need is show / hide / make-mandatory based on a field value, use a <strong>UI Policy</strong> (no code,
+    easier to maintain). Reach for a <strong>Client Script</strong> only when you need logic a UI Policy can't express.
+  </div>
+
+  <h3>4.4 Script Include + GlideAjax — the client asks the server</h3>
+  <p>A Client Script can't query the database (it's in the browser). When it needs server data it calls a
+  <strong>Script Include</strong> via <strong>GlideAjax</strong>.</p>
+  <p><span class="runs server">Server</span> A client-callable Script Include:</p>
+  <span class="filename">Script Include · client callable · IncidentUtils (server)</span>
+<pre><code>var IncidentUtils = Class.create();
+IncidentUtils.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+  getOpenCountForCaller: function() {
+    var caller = this.getParameter('sysparm_caller');   // value sent by the client
+    var ga = new GlideAggregate('incident');            // efficient COUNT, no row loop
+    ga.addQuery('caller_id', caller);
+    ga.addQuery('active', true);
+    ga.addAggregate('COUNT');
+    ga.query();
+    return ga.next() ? ga.getAggregate('COUNT') : '0';  // returned to the client
+  },
+
+  type: 'IncidentUtils'
+});</code></pre>
+  <p><span class="runs client">Browser</span> A Client Script that calls it:</p>
+  <span class="filename">Client Script · onChange · field: caller_id (browser)</span>
+<pre><code>function onChange(control, oldValue, newValue, isLoading) {
+  if (isLoading || newValue === '') return;
+
+  var ga = new GlideAjax('IncidentUtils');              // name of the Script Include
+  ga.addParam('sysparm_name', 'getOpenCountForCaller'); // method to run
+  ga.addParam('sysparm_caller', newValue);              // arg → this.getParameter(...)
+  ga.getXMLAnswer(function(answer) {                    // async — runs when the server replies
+    if (parseInt(answer, 10) &gt; 5) {
+      g_form.addInfoMessage('Heads up: this caller already has ' + answer + ' open incidents.');
+    }
+  });
+}</code></pre>
+  <div class="gotcha">
+    <span class="label">Details that trip people up</span>
+    <strong>(1)</strong> Custom param names <em>must</em> start with <code>sysparm_</code>.
+    <strong>(2)</strong> In a <em>scoped</em> app you extend <code>global.AbstractAjaxProcessor</code>.
+    <strong>(3)</strong> GlideAjax is <em>asynchronous</em> — handle the response in the callback, not on the next line.
+  </div>
+
+  <h3>4.5 Flow Designer — when not to script at all</h3>
+  <div class="why">
+    <span class="label">The decision the exams want you to make</span>
+    Reach for <strong>Flow Designer</strong> for <em>process</em> automation (when X happens, do these steps —
+    approvals, notifications, task creation). Reach for a <strong>Business Rule</strong> for <em>data-level</em>
+    enforcement that must fire on every write. "Use the lowest-code tool that fully does the job" is the right
+    answer more often than new developers expect.
+  </div>
+
+  <h2>5 — Build it (your tangible win)</h2>
+  <p>Reading scripting without running it won't stick. In your <strong>PDI</strong>, do this end-to-end — it exercises four script types at once (copies in <a href="../snippets/">../snippets/</a>):</p>
+  <ol class="steps">
+    <li>Open <strong>Scripts - Background</strong> and run the GlideRecord query from 4.1. Confirm P1s print.</li>
+    <li>Create the <strong>before Business Rule</strong> from 4.2 on <code>incident</code>. Set Priority = 1, save, confirm the work note.</li>
+    <li>Add the <strong>onChange Client Script</strong> from 4.3. Watch work notes become mandatory the instant you pick P1 — no save (that's the client/server difference made visible).</li>
+    <li>Create the <strong>Script Include + GlideAjax</strong> pair from 4.4. Pick a caller with a few incidents and watch the count message.</li>
+    <li>Reflect: which had to be server-side, which client-side, and why? Explaining that <em>is</em> the core of platform scripting.</li>
+  </ol>
+
+  <h2>Check your understanding</h2>
+  <div class="quiz" data-answer="1">
+    <p class="quiz-prompt">A Client Script needs the count of a caller's open incidents from the database. What's the correct mechanism?</p>
+    <button class="quiz-choice">Run a GlideRecord query directly in the Client Script</button>
+    <button class="quiz-choice">Call a Script Include from the Client Script via GlideAjax</button>
+    <button class="quiz-choice">Add an after Business Rule that updates the form</button>
+    <p class="quiz-explain">Client Scripts run in the <strong>browser</strong> and can't touch the database directly. They call server-side <strong>Script Includes</strong> through <strong>GlideAjax</strong>. <code>GlideRecord</code> is server-only.</p>
+  </div>
+  <div class="quiz" data-answer="2">
+    <p class="quiz-prompt">You only need to hide a field when "Category" is "Hardware." Which tool is the best fit?</p>
+    <button class="quiz-choice">A before Business Rule</button>
+    <button class="quiz-choice">A Script Include</button>
+    <button class="quiz-choice">A UI Policy</button>
+    <p class="quiz-explain">Show/hide/mandatory based on a field value is exactly what a <strong>UI Policy</strong> does — no code, easy to maintain. Prefer it over a Client Script whenever it can do the job.</p>
+  </div>
+  <div class="quiz" data-answer="0">
+    <p class="quiz-prompt">Inside a <em>before</em> Business Rule you set <code>current.state = 2</code>. What else must you do to persist it?</p>
+    <button class="quiz-choice">Nothing — a before rule saves the record automatically</button>
+    <button class="quiz-choice">Call current.update()</button>
+    <button class="quiz-choice">Call current.insert()</button>
+    <p class="quiz-explain">A <strong>before</strong> rule runs <em>before</em> the write, so your change rides along with the save. Calling <code>current.update()</code> here (or in an <em>after</em> rule on the same record) risks recursion.</p>
+  </div>
+
+  <div class="source">
+    <span class="label">Primary sources</span>
+    <a href="https://developer.servicenow.com/dev.do">Developer Portal &amp; PDI</a> ·
+    the <strong>API reference</strong> there (bookmark <code>GlideRecord</code>, <code>GlideSystem</code>/<code>gs</code>, <code>GlideForm</code>/<code>g_form</code>, <code>GlideAjax</code>) ·
+    <a href="https://www.servicenow.com/docs/">Product docs</a> (read the current release).
+  </div>
+
+  <div class="teacher">
+    <strong>I'm your teacher — ask follow-ups freely.</strong> "What's dot-walking?" "When is async vs. after?"
+    No question is too small. For exam-specific material (blueprints, domain weightings, what each exam tests),
+    see the cert folders — e.g. the <a href="../../certs/cad/index.html">CAD track</a>. Back to
+    <a href="../../index.html">ServiceNow Learn</a>.
+  </div>
+
+</div>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>
