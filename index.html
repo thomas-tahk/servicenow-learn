@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiceNow CAD — Home</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .cards { list-style: none; padding: 0; margin: 1.5rem 0; }
+  .cards li { border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 0.8rem 0; }
+  .cards a { font-size: 1.1rem; font-weight: 600; border: none; }
+  .cards .desc { font-family: var(--font-ui); font-size: 0.9rem; color: var(--ink-soft); margin: 0.3rem 0 0; }
+  .cards .tag { font-family: var(--font-ui); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: var(--good); padding: 0.1rem 0.5rem; border-radius: 4px; margin-left: 0.5rem; vertical-align: middle; }
+  .cards .tag.soon { background: var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="wrap wrap--wide">
+
+  <div class="crumbs">ServiceNow · Certified Application Developer (CAD)</div>
+  <h1>ServiceNow CAD</h1>
+  <p class="subtitle">My working repository for the Certified Application Developer track — guides, PDI-ready code snippets, and running notes from the ServiceNow University bootcamp and beyond.</p>
+
+  <div class="win">
+    <strong>Exam at a glance:</strong> 60 questions · 90 minutes · <strong>70% to pass</strong> · scenario-based.
+    Read the guides here, build everything in a <a href="https://developer.servicenow.com/dev.do">Personal Developer Instance</a>.
+  </div>
+
+  <h2>Guides</h2>
+  <ul class="cards">
+    <li>
+      <a href="guides/servicenow-cad-study-guide.html">Study guide &amp; scripting deep-dive</a><span class="tag">Ready</span>
+      <p class="desc">The four doc sites, lab-instance vs. PDI, the 6 exam domains with an interactive progress tracker, the 5 mental models, and a hands-on deep-dive into the Automation domain (GlideRecord, Business Rules, Client Scripts, Script Include + GlideAjax, Flow Designer).</p>
+    </li>
+    <li>
+      <span style="font-size:1.1rem;font-weight:600;color:var(--ink-soft);">Security &amp; ACLs deep-dive</span><span class="tag soon">Planned</span>
+      <p class="desc">The 20% domain people fail most: how ACLs are evaluated, roles, scripted ACLs, field-level access.</p>
+    </li>
+    <li>
+      <span style="font-size:1.1rem;font-weight:600;color:var(--ink-soft);">Managing Applications deep-dive</span><span class="tag soon">Planned</span>
+      <p class="desc">The heaviest domain (25%): scoped apps, Studio / App Engine, update sets vs. source control, versioning, the Store.</p>
+    </li>
+  </ul>
+
+  <h2>The blueprint, by weight</h2>
+  <table>
+    <tr><th>Weight</th><th>Domain</th></tr>
+    <tr><td><strong>25%</strong></td><td>Managing Applications</td></tr>
+    <tr><td><strong>20%</strong></td><td>Security &amp; Restricting Access</td></tr>
+    <tr><td><strong>20%</strong></td><td>Working with Data in ServiceNow</td></tr>
+    <tr><td><strong>20%</strong></td><td>Automating Applications for Collaboration &amp; Productivity</td></tr>
+    <tr><td><strong>10%</strong></td><td>Application User Experience</td></tr>
+    <tr><td><strong>5%</strong></td><td>Application Design &amp; Development Concepts</td></tr>
+  </table>
+
+  <h2>Repository layout</h2>
+  <table>
+    <tr><th>Folder</th><th>What's in it</th></tr>
+    <tr><td><code>guides/</code></td><td>HTML study guides &amp; deep-dives (open in a browser)</td></tr>
+    <tr><td><code>snippets/</code></td><td>PDI-pasteable scripts, organized by API</td></tr>
+    <tr><td><code>notes/</code></td><td>Running notes &amp; gotchas captured while studying</td></tr>
+    <tr><td><code>assets/</code></td><td>Shared <code>style.css</code> + <code>quiz.js</code> (keeps this repo self-contained)</td></tr>
+  </table>
+
+  <div class="source">
+    <span class="label">Key links</span>
+    <a href="https://developer.servicenow.com/dev.do">Developer Portal &amp; PDI</a> ·
+    <a href="https://learning.servicenow.com/lxp/en/credentials/certified-application-developer-mainline-exam-blueprint?id=kb_article_view&amp;sysparm_article=KB0011498">CAD Exam Blueprint</a> ·
+    <a href="https://www.servicenow.com/docs/">Product Docs</a> ·
+    <a href="https://www.servicenow.com/community/">Community</a>
+  </div>
+
+</div>
+</body>
+</html>
