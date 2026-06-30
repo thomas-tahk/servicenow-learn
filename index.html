@@ -3,69 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ServiceNow CAD — Home</title>
+<title>ServiceNow Learn — Home</title>
 <link rel="stylesheet" href="assets/style.css">
 <style>
-  .cards { list-style: none; padding: 0; margin: 1.5rem 0; }
+  .cards { list-style: none; padding: 0; margin: 1.2rem 0; }
   .cards li { border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 0.8rem 0; }
   .cards a { font-size: 1.1rem; font-weight: 600; border: none; }
+  .cards .muted { font-size: 1.1rem; font-weight: 600; color: var(--ink-soft); }
   .cards .desc { font-family: var(--font-ui); font-size: 0.9rem; color: var(--ink-soft); margin: 0.3rem 0 0; }
-  .cards .tag { font-family: var(--font-ui); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: var(--good); padding: 0.1rem 0.5rem; border-radius: 4px; margin-left: 0.5rem; vertical-align: middle; }
-  .cards .tag.soon { background: var(--ink-soft); }
+  .tag { font-family: var(--font-ui); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: var(--good); padding: 0.1rem 0.5rem; border-radius: 4px; margin-left: 0.5rem; vertical-align: middle; }
+  .tag.soon { background: var(--ink-soft); }
 </style>
 </head>
 <body>
 <div class="wrap wrap--wide">
 
-  <div class="crumbs">ServiceNow · Certified Application Developer (CAD)</div>
-  <h1>ServiceNow CAD</h1>
-  <p class="subtitle">My working repository for the Certified Application Developer track — guides, PDI-ready code snippets, and running notes from the ServiceNow University bootcamp and beyond.</p>
+  <div class="crumbs">ServiceNow · Learning &amp; certification journey</div>
+  <h1>ServiceNow Learn</h1>
+  <p class="subtitle">My working repository for the whole ServiceNow journey — starting at CAD and building up the ladder. <strong>Platform fundamentals</strong> (reused by every cert) live separately from each <strong>certification</strong>'s exam-specific material, so nothing is tied to one exam.</p>
 
   <div class="win">
-    <strong>Exam at a glance:</strong> 60 questions · 90 minutes · <strong>70% to pass</strong> · scenario-based.
-    Read the guides here, build everything in a <a href="https://developer.servicenow.com/dev.do">Personal Developer Instance</a>.
+    <strong>Start here:</strong> if you're new, read <a href="platform/fundamentals/index.html">Platform Fundamentals</a>
+    first (it applies to every cert), then open the cert you're studying. Build everything in a free
+    <a href="https://developer.servicenow.com/dev.do">Personal Developer Instance</a>.
   </div>
 
-  <h2>Guides</h2>
+  <h2>Platform (cross-cert)</h2>
   <ul class="cards">
     <li>
-      <a href="guides/servicenow-cad-study-guide.html">Study guide &amp; scripting deep-dive</a><span class="tag">Ready</span>
-      <p class="desc">The four doc sites, lab-instance vs. PDI, the 6 exam domains with an interactive progress tracker, the 5 mental models, and a hands-on deep-dive into the Automation domain (GlideRecord, Business Rules, Client Scripts, Script Include + GlideAjax, Flow Designer).</p>
+      <a href="platform/fundamentals/index.html">Platform Fundamentals</a><span class="tag">Ready</span>
+      <p class="desc">The four doc sites, lab-instance vs. PDI, the five mental models, and the client/server scripting model (GlideRecord, Business Rules, Client Scripts, Script Include + GlideAjax, Flow Designer). Reused by every certification.</p>
     </li>
     <li>
-      <span style="font-size:1.1rem;font-weight:600;color:var(--ink-soft);">Security &amp; ACLs deep-dive</span><span class="tag soon">Planned</span>
-      <p class="desc">The 20% domain people fail most: how ACLs are evaluated, roles, scripted ACLs, field-level access.</p>
+      <a href="platform/snippets/">Snippets</a>
+      <p class="desc">PDI-pasteable scripts, named <code>*.server.js</code> / <code>*.client.js</code> by where they run. Open one, paste it into your instance, watch it work — your fastest self-verification.</p>
     </li>
     <li>
-      <span style="font-size:1.1rem;font-weight:600;color:var(--ink-soft);">Managing Applications deep-dive</span><span class="tag soon">Planned</span>
-      <p class="desc">The heaviest domain (25%): scoped apps, Studio / App Engine, update sets vs. source control, versioning, the Store.</p>
+      <a href="platform/notes/">Notes</a>
+      <p class="desc">Running gotchas captured while studying.</p>
     </li>
   </ul>
 
-  <h2>The blueprint, by weight</h2>
-  <table>
-    <tr><th>Weight</th><th>Domain</th></tr>
-    <tr><td><strong>25%</strong></td><td>Managing Applications</td></tr>
-    <tr><td><strong>20%</strong></td><td>Security &amp; Restricting Access</td></tr>
-    <tr><td><strong>20%</strong></td><td>Working with Data in ServiceNow</td></tr>
-    <tr><td><strong>20%</strong></td><td>Automating Applications for Collaboration &amp; Productivity</td></tr>
-    <tr><td><strong>10%</strong></td><td>Application User Experience</td></tr>
-    <tr><td><strong>5%</strong></td><td>Application Design &amp; Development Concepts</td></tr>
-  </table>
+  <h2>Certifications</h2>
+  <ul class="cards">
+    <li>
+      <a href="certs/cad/index.html">CAD — Certified Application Developer</a><span class="tag">Active</span>
+      <p class="desc">Exam blueprint, the six domains with weightings, an interactive progress tracker, and a "where to learn each domain" map. 60 q · 90 min · 70% to pass.</p>
+    </li>
+    <li>
+      <span class="muted">CSA — Certified System Administrator</span><span class="tag soon">Planned</span>
+      <p class="desc">The admin foundation CAD assumes. Likely the prerequisite layer to backfill.</p>
+    </li>
+    <li>
+      <span class="muted">CIS / CAS specialist tracks</span><span class="tag soon">Later</span>
+      <p class="desc">Implementation- and application-specialist certs that come after CAD.</p>
+    </li>
+  </ul>
 
-  <h2>Repository layout</h2>
+  <h2>How to trust &amp; verify this material</h2>
+  <p>This repo is study material — use it, but verify the load-bearing facts. The design keeps that lightweight:</p>
   <table>
-    <tr><th>Folder</th><th>What's in it</th></tr>
-    <tr><td><code>guides/</code></td><td>HTML study guides &amp; deep-dives (open in a browser)</td></tr>
-    <tr><td><code>snippets/</code></td><td>PDI-pasteable scripts, organized by API</td></tr>
-    <tr><td><code>notes/</code></td><td>Running notes &amp; gotchas captured while studying</td></tr>
-    <tr><td><code>assets/</code></td><td>Shared <code>style.css</code> + <code>quiz.js</code> (keeps this repo self-contained)</td></tr>
+    <tr><th>Signal</th><th>What it means for trust</th></tr>
+    <tr><td><strong>"Verify against…" box</strong> (end of each guide)</td><td>One link to the <em>official</em> ServiceNow source for that page's facts (blueprint, API). Click it to confirm — don't take weightings or method names on faith.</td></tr>
+    <tr><td><strong>Runnable snippets</strong></td><td>The strongest verification: paste into your PDI and the platform itself confirms the code is right. If it runs, it's right.</td></tr>
+    <tr><td><strong>Quizzes</strong></td><td>Each guide's quiz answers restate the key facts with explanations — a quick self-check that you (and the material) have it right.</td></tr>
+    <tr><td><strong>Teaching vs. fact</strong></td><td>Tables, API names, and exam weightings are claims to verify against official docs. Framing like "start here" or "prefer the lower-code tool" is my teaching judgment, not gospel.</td></tr>
   </table>
+  <div class="note">
+    <span class="label">Avoiding overload</span>
+    Material is added one guide at a time, newest noted in the repo's commit history. You don't need to read it
+    all at once — open the cert you're on, read its linked fundamentals sections, and skip the rest until you need it.
+  </div>
 
   <div class="source">
     <span class="label">Key links</span>
     <a href="https://developer.servicenow.com/dev.do">Developer Portal &amp; PDI</a> ·
-    <a href="https://learning.servicenow.com/lxp/en/credentials/certified-application-developer-mainline-exam-blueprint?id=kb_article_view&amp;sysparm_article=KB0011498">CAD Exam Blueprint</a> ·
+    <a href="https://learning.servicenow.com/">ServiceNow University</a> ·
     <a href="https://www.servicenow.com/docs/">Product Docs</a> ·
     <a href="https://www.servicenow.com/community/">Community</a>
   </div>

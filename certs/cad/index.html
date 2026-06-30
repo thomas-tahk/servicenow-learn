@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiceNow CAD — Certified Application Developer</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  .tracker { font-family: var(--font-ui); border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 2rem 0; background: #fff; }
+  .tracker h3 { margin: 0 0 0.2rem; }
+  .tracker .hint { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 0.8rem; }
+  .tracker ul { list-style: none; padding-left: 0; margin: 0; }
+  .tracker li { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); font-size: 0.95rem; }
+  .tracker li:last-child { border-bottom: none; }
+  .tracker input[type=checkbox] { width: 1.05rem; height: 1.05rem; accent-color: var(--good); flex: 0 0 auto; transform: translateY(0.15rem); }
+  .tracker .wt { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); flex: 0 0 2.6rem; }
+  .tracker label.done { text-decoration: line-through; color: var(--ink-soft); }
+  .tracker .bar { height: 6px; background: var(--rule); border-radius: 3px; margin-top: 0.9rem; overflow: hidden; }
+  .tracker .bar > span { display: block; height: 100%; width: 0; background: var(--good); transition: width .2s; }
+  .tracker .pct { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.4rem; }
+</style>
+</head>
+<body>
+<div class="wrap wrap--wide">
+
+  <div class="crumbs">
+    <a href="../../index.html">ServiceNow Learn</a> · Certifications · CAD
+  </div>
+  <h1>Certified Application Developer (CAD)</h1>
+  <p class="subtitle">The exam-specific layer: blueprint, domain weightings, and a progress tracker. The skills themselves live in <a href="../../platform/fundamentals/index.html">Platform Fundamentals</a> — this page is just the map of what CAD tests and how heavily.</p>
+
+  <div class="win">
+    <strong>Exam at a glance:</strong> 60 questions · 90 minutes · <strong>70% to pass</strong> · scenario-based.
+    Build everything in a free <a href="https://developer.servicenow.com/dev.do">Personal Developer Instance</a> —
+    not your work instance.
+  </div>
+
+  <div class="note">
+    <span class="label">How CAD relates to the rest of the ladder</span>
+    CAD assumes admin fundamentals (the <strong>CSA</strong> level). If the App-Engine/admin basics feel shaky, the
+    CSA material fills exactly that gap. After CAD come the specialist (CIS/CAS) and architect (CTA/CMA) tracks —
+    all built on the same <a href="../../platform/fundamentals/index.html">platform fundamentals</a>.
+  </div>
+
+  <h2>The blueprint — and what each domain really tests</h2>
+  <p>Notice the heaviest domains <em>are</em> the real-developer skills. Passing CAD properly and learning to build are the same path.</p>
+
+  <div class="tracker" id="tracker">
+    <h3>Your CAD domain tracker</h3>
+    <p class="hint">Tick a domain when you finish its bootcamp module <em>and</em> rebuild it once in your PDI. Saved in this browser.</p>
+    <ul>
+      <li><span class="wt">25%</span><input type="checkbox" id="d1"><label for="d1"><strong>Managing Applications</strong> — scoped apps, Studio / App Engine, update sets vs. source control, versioning, dependencies, the Store. <em>(Biggest weight; biggest gap for a new builder — start here.)</em></label></li>
+      <li><span class="wt">20%</span><input type="checkbox" id="d2"><label for="d2"><strong>Security &amp; Restricting Access</strong> — ACLs, roles, scripted ACLs, record/field access, data encryption. <em>(Most-failed.)</em></label></li>
+      <li><span class="wt">20%</span><input type="checkbox" id="d3"><label for="d3"><strong>Working with Data</strong> — tables, fields, the dictionary, relationships, import sets + transform maps, data policies.</label></li>
+      <li><span class="wt">20%</span><input type="checkbox" id="d4"><label for="d4"><strong>Automating (Collaboration &amp; Productivity)</strong> — Business Rules, Client Scripts, Script Includes, UI Policies/Actions, GlideAjax, Flow Designer. <em>(Covered in <a href="../../platform/fundamentals/index.html">Platform Fundamentals §4</a>.)</em></label></li>
+      <li><span class="wt">10%</span><input type="checkbox" id="d5"><label for="d5"><strong>Application User Experience</strong> — forms, lists, UI Builder, Service Portal basics, configuring the UI.</label></li>
+      <li><span class="wt">5%</span><input type="checkbox" id="d6"><label for="d6"><strong>Design &amp; Development Concepts</strong> — the app lifecycle, when to use what, naming.</label></li>
+    </ul>
+    <div class="bar"><span id="bar"></span></div>
+    <p class="pct" id="pct">0 of 6 domains marked complete.</p>
+  </div>
+
+  <h2>Where to learn each domain</h2>
+  <table>
+    <tr><th>Domain</th><th>Best starting point</th><th>Needs a PDI?</th></tr>
+    <tr><td>Managing Applications</td><td>Dev portal "Build Your First App" + App Engine modules</td><td><strong>Yes</strong> — build one scoped app and grow it</td></tr>
+    <tr><td>Security &amp; ACLs</td><td>University ACL modules; <a href="../../platform/fundamentals/index.html">fundamentals</a> mental model #4</td><td><strong>Yes</strong> — break access on purpose, watch it fail</td></tr>
+    <tr><td>Working with Data</td><td>App Engine / data-model modules</td><td>Helpful</td></tr>
+    <tr><td>Automating</td><td><a href="../../platform/fundamentals/index.html">Platform Fundamentals §4</a> + <a href="../../platform/snippets/">snippets</a></td><td><strong>Yes</strong> — run every snippet</td></tr>
+    <tr><td>Application UX</td><td>Forms/lists + UI Builder modules</td><td>Helpful</td></tr>
+    <tr><td>Design concepts</td><td>The app-dev lifecycle overview</td><td>No</td></tr>
+  </table>
+
+  <h2>Check your understanding</h2>
+  <div class="quiz" data-answer="2">
+    <p class="quiz-prompt">Which CAD domain carries the most weight — and is the biggest gap for someone coming from daily use?</p>
+    <button class="quiz-choice">Application User Experience (10%)</button>
+    <button class="quiz-choice">Security &amp; Restricting Access (20%)</button>
+    <button class="quiz-choice">Managing Applications (25%)</button>
+    <p class="quiz-explain"><strong>Managing Applications</strong> (scoped apps, Studio, update sets, versioning) is 25% and almost entirely new to a user who hasn't built before. Start there.</p>
+  </div>
+  <div class="quiz" data-answer="1">
+    <p class="quiz-prompt">In a scoped application named "Asset Tracker," what do its table and field names look like?</p>
+    <button class="quiz-choice">Plain names like asset_tracker, with no prefix</button>
+    <button class="quiz-choice">Prefixed into the app's namespace, e.g. x_yourco_asset_…</button>
+    <button class="quiz-choice">They must reuse existing global tables only</button>
+    <p class="quiz-explain">A <strong>scoped app</strong> gets its own namespace (<code>x_&lt;company&gt;_&lt;app&gt;_…</code>), keeping its tables, fields, and scripts isolated from the global platform. That isolation is the whole point of the 25% Managing Applications domain.</p>
+  </div>
+
+  <div class="source">
+    <span class="label">Verify against the official blueprint</span>
+    The weightings and logistics on this page come straight from the
+    <a href="https://learning.servicenow.com/lxp/en/credentials/certified-application-developer-mainline-exam-blueprint?id=kb_article_view&amp;sysparm_article=KB0011498">CAD Exam Blueprint on ServiceNow University</a> —
+    open it and confirm the six domains and percentages match before you rely on them. ServiceNow revises blueprints by release.
+  </div>
+
+  <div class="teacher">
+    <strong>Next deep-dives (same format):</strong> a dedicated <em>Security/ACLs</em> guide (20%, most-failed) or
+    <em>Managing Applications</em> (25%, heaviest). For the scripting skills, see
+    <a href="../../platform/fundamentals/index.html">Platform Fundamentals</a>. Back to
+    <a href="../../index.html">ServiceNow Learn</a>.
+  </div>
+
+</div>
+
+<script src="../../assets/quiz.js"></script>
+<script>
+  (function () {
+    var KEY = 'cad-tracker-v1';
+    var boxes = [...document.querySelectorAll('#tracker input[type=checkbox]')];
+    var bar = document.getElementById('bar');
+    var pct = document.getElementById('pct');
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    function render() {
+      var done = 0;
+      boxes.forEach(function (b) {
+        var lbl = document.querySelector('label[for="' + b.id + '"]');
+        if (b.checked) { done++; lbl.classList.add('done'); } else { lbl.classList.remove('done'); }
+      });
+      bar.style.width = Math.round((done / boxes.length) * 100) + '%';
+      pct.textContent = done + ' of ' + boxes.length + ' domains marked complete.';
+    }
+    boxes.forEach(function (b) {
+      if (saved[b.id]) b.checked = true;
+      b.addEventListener('change', function () {
+        saved[b.id] = b.checked;
+        localStorage.setItem(KEY, JSON.stringify(saved));
+        render();
+      });
+    });
+    render();
+  })();
+</script>
+</body>
+</html>
